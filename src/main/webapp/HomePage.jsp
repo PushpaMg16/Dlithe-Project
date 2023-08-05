@@ -31,6 +31,14 @@
         </div>
     </nav>
     <div class="container-fluid text-start">
+    	<%if((String)request.getAttribute("message")!=null){
+		String message = (String)request.getAttribute("message");
+		%>
+			<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+			  ${message}
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		<% message=null;} %>
         <div class="row mt-3">
           <div class="col-sm-2">
             <div class="list-group">
@@ -40,8 +48,10 @@
                 <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-file-earmark-person"></i> Suppliers</a>
                 <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-currency-rupee"></i> Sales</a>
                 <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-wallet"></i> Purchases</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-vcard"></i> Users</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-journals"></i> User Log</a>
+                <%if(user.getUserType().equals("ADMINISTRATOR")){ %>
+	                <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-vcard"></i> Users</a>
+	                <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-journals"></i> User Log</a>
+                <%} %>
               </div>
           </div>
           <div class="col text-start">
