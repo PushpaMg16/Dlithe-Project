@@ -10,13 +10,18 @@
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
+	<%@page import="DB.User" %>
 	<%
-	String username = (String)request.getAttribute("username"); 
-	String userType = (String)request.getAttribute("userType");
+		User user = (User)session.getAttribute("user");
+		if(user==null){
+			request.setAttribute("message", "Invalid user. Please login!");
+			RequestDispatcher rd = request.getRequestDispatcher("LoginPage.jsp");
+			rd.forward(request, response);
+		}
 	%>
 	<div class="container w-50 mt-5">
-        <h1 class="text-center">Welcome! ${username} ${userType}</h1>
-        
+        <h1 class="text-center">Welcome! ${user.getUsername()}</h1>
+        <button type="button" class="btn btn-primary" onclick="location.href='LogoutServlet'">Logout</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

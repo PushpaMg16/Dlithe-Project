@@ -13,12 +13,14 @@
 	<div class="container w-50 mt-5">
 	
 	<!-- check if password is invalid -->
-	<%if((String)request.getAttribute("invalid")=="true"){%>
+	<%if((String)request.getAttribute("message")!=null){
+		String message = (String)request.getAttribute("message");
+	%>
 		<div class="alert alert-danger alert-dismissible fade show" role="alert">
-		  Invalid username/password. Try again!
+		  ${message}
 		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
-	<%} %>
+	<% message=null;} %>
 	
         <h1 class="text-center">Inventory Manager</h1>
         <form method=post action=LoginServlet>
